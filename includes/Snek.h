@@ -23,7 +23,7 @@ class Snek
 		const Coord getHead(void) const;
 		const std::vector<Coord> getBody(void) const;
 		const char getDirection(void) const;
-		const Coord getPrevLastElt(void) const;
+		Coord getPrevLastElt(void) const;
 
 		void setSize(int size);
 		void setHead(int x, int y);

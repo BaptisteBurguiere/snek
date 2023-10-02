@@ -1,6 +1,10 @@
 #include <Map.h>
 
-Map::Map(const unsigned int size) : _size(size)
+Map::Map(const unsigned int size) : _size(size) {}
+
+Map::~Map(void) {}
+
+void Map::load(void)
 {
 	this->_map = new int[this->_size * this->_size];
 	for (int j = 0; j < this->_size; ++j)
@@ -10,7 +14,7 @@ Map::Map(const unsigned int size) : _size(size)
 	}
 }
 
-Map::~Map(void)
+void Map::destroy(void)
 {
 	delete [] this->_map;
 }

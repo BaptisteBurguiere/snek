@@ -1,18 +1,23 @@
 #include <Model.h>
+#include <iostream>
 
-Model::Model(void) : _size(DEFAULT_MAP_SIZE), _map(Map(DEFAULT_MAP_SIZE)), _snek(Snek())
-{
-	this->_map.setMap(0, 0, HEAD);
-	this->generateApple();
-}
+Model::Model(void) : _size(DEFAULT_MAP_SIZE), _map(Map(DEFAULT_MAP_SIZE)), _snek(Snek()) {}
 
-Model::Model(const unsigned int size) : _size(size), _map(Map(size)), _snek(Snek())
-{
-	this->_map.setMap(0, 0, HEAD);
-	this->generateApple();
-}
+Model::Model(const unsigned int size) : _size(size), _map(Map(size)), _snek(Snek()) {}
 
 Model::~Model(void) {}
+
+void Model::load(void)
+{
+	this->_map.load();
+	this->_map.setMap(0, 0, HEAD);
+	this->generateApple();
+}
+
+void Model::destroy(void)
+{
+	this->_map.destroy();
+}
 
 void Model::updateSnek(char dir)
 {
@@ -60,7 +65,15 @@ int Model::updateMap(void)
 		newApple = true;
 	}
 
-	// this->_map.setMap()
+
+	this->_map.setMap(head[0], head[1], HEAD);
+	if (newApple)
+		this->generateApple();
+	else
+	{
+		Coord prev = this->_snek.getPrevLastElt();
+		this->_map.setMap(prev[0], prev[1], EMPTY);
+	}
 	return -1;
 
 
@@ -76,7 +89,10 @@ void Model::generateApple(void)
 		if (this->_map.getMapCoord(x, y) == EMPTY)
 		{
 			this->_map.setMap(x, y, APPLE);
+			std::cout << x << "," << y << std::endl;
 			return;
 		}
 	}
 }
+
+const int *Model::getMap(void) {return this->_map.getMap();}

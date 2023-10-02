@@ -4,7 +4,7 @@ FLAGS=-Wall -Wextra -Werror -g
 SRCS=$(wildcard *.cpp) \
 	$(wildcard Model/*.cpp) \
 	$(wildcard View/*.cpp) \
-# 	$(wildcard Controller/*.cpp) \
+	$(wildcard Controller/*.cpp) \
 
 ${NAME} :
 	$(CC) -Iincludes $(SRCS) -o $(NAME) -g

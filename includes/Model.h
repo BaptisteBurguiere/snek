@@ -12,8 +12,13 @@ class Model
 		Model(const unsigned int size);
 		~Model(void);
 
+		void load(void);
+		void destroy(void);
+
 		void updateSnek(char dir);
 		int updateMap(void);
+
+		const int *getMap(void);
 
 	private:
 		const unsigned int _size;

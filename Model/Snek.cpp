@@ -31,19 +31,19 @@ void Snek::move(void)
 	switch (this->_direction)
 	{
 		case UP:
-			this->_head[0] -= 1;
-			break;
-
-		case DOWN:
-			this->_head[0] += 1;
-			break;
-
-		case LEFT:
 			this->_head[1] -= 1;
 			break;
 
-		case RIGHT:
+		case DOWN:
 			this->_head[1] += 1;
+			break;
+
+		case LEFT:
+			this->_head[0] -= 1;
+			break;
+
+		case RIGHT:
+			this->_head[0] += 1;
 			break;
 	}
 }
@@ -56,7 +56,7 @@ const std::vector<Coord> Snek::getBody(void) const {return this->_body;}
 
 const char Snek::getDirection(void) const {return this->_direction;}
 
-const Coord Snek::getPrevLastElt(void) const {return this->_prev_last_elt;}
+Coord Snek::getPrevLastElt(void) const {return this->_prev_last_elt;}
 
 void Snek::setSize(int size) {this->_size = size;}
 

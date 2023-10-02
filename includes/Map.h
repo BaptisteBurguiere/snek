@@ -22,6 +22,9 @@ class Map
 			virtual const char *what() const throw();
 		};
 
+		void load(void);
+		void destroy(void);
+
 		const unsigned int getSize(void) const;
 		const int *getMap(void) const;
 		const int getMapCoord(int x, int y) const;
