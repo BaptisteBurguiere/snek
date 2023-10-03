@@ -5,10 +5,10 @@
 # include <exception>
 # include <vector>
 
-# define UP 'u'
-# define DOWN 'd'
-# define LEFT 'l'
-# define RIGHT 'r'
+# define UP 'w'
+# define DOWN 's'
+# define LEFT 'a'
+# define RIGHT 'd'
 
 class Snek
 {

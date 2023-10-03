@@ -89,7 +89,6 @@ void Model::generateApple(void)
 		if (this->_map.getMapCoord(x, y) == EMPTY)
 		{
 			this->_map.setMap(x, y, APPLE);
-			std::cout << x << "," << y << std::endl;
 			return;
 		}
 	}

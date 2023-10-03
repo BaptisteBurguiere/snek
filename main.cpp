@@ -3,6 +3,7 @@
 #include <Controller.h>
 #include <iostream>
 #include <unistd.h>
+#include <stdio.h>
 
 int main(void)
 {
@@ -14,7 +15,10 @@ int main(void)
 	{
 		usleep(100000);
 		if (controller.updateModel() != -1)
+		{
+			sleep(2);
 			return 0;
+		}
 		controller.updateView();
 	}
 	return 0;

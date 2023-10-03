@@ -6,66 +6,75 @@ View::View(const unsigned int size) : _size(size) {}
 
 View::~View(void) {}
 
+void View::load(void)
+{
+	initscr();
+	start_color();
+	init_pair(1, COLOR_RED, COLOR_RED);
+	init_pair(2, COLOR_GREEN, COLOR_GREEN);
+}
+
+void View::destroy(void)
+{
+	endwin();
+}
+
 void View::drawMap(void)
 {
-	std::cout << RESET << "╔";
-	for (int i = 0; i < this->_size * 2; ++i)
-		std::cout << "═";
-	std::cout << "╗" << std::endl;
-	for (int i = 0; i < this->_size; ++i)
-	{
-		std::cout << "║";
-		for (int i = 0; i < this->_size * 2; ++i)
-			std::cout << " ";
-		std::cout << "║";
-		std::cout << std::endl;
-	}
-	std::cout << "╚";
-	for (int i = 0; i < this->_size * 2; ++i)
-		std::cout << "═";
-	std::cout << "╝" << std::endl;
+	WINDOW *boite= subwin(stdscr, this->_size + 2, this->_size * 2 + 2, 0, 0);
+    wborder(boite, '|', '|', '-', '-', '+', '+', '+', '+');
+    wrefresh(boite);
 }
 
 void View::drawMapContent(const int *map)
 {
 	for (int j = 0; j < this->_size; ++j)
 	{
-		for (int i = 0; i < this->_size; ++i)
+		for (int i = 0; i < this->_size * 2; i += 2)
 		{
-			switch (map[COORD(i, j)])
+			move(j + 1, i + 1);
+			switch (map[COORD(i / 2, j)])
 			{
 				case EMPTY:
-					std::cout << RESET << "  ";
+					addch(' ');
+					move(j + 1, i + 2);
+					addch(' ');
 					break;
 
 				case HEAD: case BODY:
-					std::cout << BACKGROUND_GREEN << "  ";
+					attron(COLOR_PAIR(2));
+					addch(' ');
+					move(j + 1, i + 2);
+					addch(' ');
+					attroff(COLOR_PAIR(2));
 					break;
 
 				case APPLE:
-					std::cout << BACKGROUND_RED << "  ";
+					attron(COLOR_PAIR(1));
+					addch(' ');
+					move(j + 1, i + 2);
+					addch(' ');
+					attroff(COLOR_PAIR(1));
 					break;
 
 				default:
 					break;
 			}
 		}
-		std::cout << CURSOR_NEXT_LINE;
 	}
-	std::cout << RESET;
 }
 
 void View::update(const int *map)
 {
-	std::system("clear");
-	this->drawMap();
-	std::cout << CURSOR_START;
 	this->drawMapContent(map);
-	std::cout << std::endl;
+	move(this->_size + 2, 0);
+	refresh();
 }
 
 void View::displayScore(int score)
 {
-	std::system("clear");
-	std::cout << "Your score: " << score << std::endl;
+	clear();
+	move(0, 0);
+	printw("Your score: %d", score);
+	refresh();
 }

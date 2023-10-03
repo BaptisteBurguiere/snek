@@ -7,7 +7,7 @@ SRCS=$(wildcard *.cpp) \
 	$(wildcard Controller/*.cpp) \
 
 ${NAME} :
-	$(CC) -Iincludes $(SRCS) -o $(NAME) -g
+	$(CC) -Iincludes -lncurses $(SRCS) -o $(NAME) -g
 
 all : ${NAME}
 

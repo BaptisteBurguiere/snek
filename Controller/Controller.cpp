@@ -4,11 +4,14 @@ Controller::Controller(Model &model, View &view) : _model(model), _view(view)
 {
 	srand(time(NULL));
 	this->_model.load();
+	this->_view.load();
+	this->_view.drawMap();
 }
 
 Controller::~Controller(void)
 {
 	this->_model.destroy();
+	this->_view.destroy();
 }
 
 int Controller::updateModel(char dir)
