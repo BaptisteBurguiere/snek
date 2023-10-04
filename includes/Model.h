@@ -15,7 +15,7 @@ class Model
 		void load(void);
 		void destroy(void);
 
-		void updateSnek(char dir);
+		void updateSnek(char &dir);
 		int updateMap(void);
 
 		const int *getMap(void);

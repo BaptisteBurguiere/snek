@@ -19,7 +19,7 @@ void Model::destroy(void)
 	this->_map.destroy();
 }
 
-void Model::updateSnek(char dir)
+void Model::updateSnek(char &dir)
 {
 	switch (dir)
 	{
@@ -42,7 +42,7 @@ void Model::updateSnek(char dir)
 		default:
 			break;
 	}
-
+	dir = ' ';
 	this->_snek.move();
 }
 
@@ -53,7 +53,8 @@ int Model::updateMap(void)
 
 	if (head[0] < 0 || head[0] >= this->_size
 		|| head[1] < 0 || head[1] >= this->_size
-		|| map[COORD(head[0], head[1])] == BODY)
+		|| map[COORD(head[0], head[1])] == BODY
+		|| map[COORD(head[0], head[1])] == HEAD)
 		return this->_snek.getSize();
 
 	bool newApple = false;

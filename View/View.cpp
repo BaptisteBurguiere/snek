@@ -12,6 +12,7 @@ void View::load(void)
 	start_color();
 	init_pair(1, COLOR_RED, COLOR_RED);
 	init_pair(2, COLOR_GREEN, COLOR_GREEN);
+	this->drawMap();
 }
 
 void View::destroy(void)

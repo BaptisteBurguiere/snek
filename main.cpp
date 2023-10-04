@@ -7,16 +7,17 @@
 
 int main(void)
 {
-	Model model = Model();
-	View view = View();
-	Controller controller = Controller(model, view);
+	Model model = Model(30);
+	View view = View(30);
+	Controller controller(model, view);
 	controller.updateView();
-	for (int i = 0; i < 20; ++i)
+	while(true)
 	{
-		usleep(100000);
+		usleep(50000);
 		if (controller.updateModel() != -1)
 		{
-			sleep(2);
+			controller.exit();
+			// sleep(2);
 			return 0;
 		}
 		controller.updateView();
